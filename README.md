@@ -1,27 +1,20 @@
-# Cisforce
+# Angular Test Task
+The main goal of the task is to show your skills in the best way possible. Please use proper styling and animation.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
+Quality of code (proper logic, structure and style) is very important, and we should be able to run your code
 
-## Development server
+## Task
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Create the new Angular 7+ project using angular CLI
+2. Create a page with a paginated users list. You should create custom components for the list itself and the particular user card. The user list should be horizontally centered.
+3. Use the following HTTP endpoint: https://reqres.in/api/users?page={page} to get the cards data, which includes avatar image, first_name, last_name and id for the card. Single user can be requested via this endpoint: https://reqres.in/api/users/{id}.
+4. On click of the card, it should direct to a new page with information about this card.
+5. On each individual card page a back button should be present.
 
-## Code scaffolding
+## Important notes
+1. Use angular router for navigation between two pages.
+2. Use random colors, fonts - as per your choice.
+3. SCSS for any styling
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Optional
+Introduce proper caching to avoid additional requests.
