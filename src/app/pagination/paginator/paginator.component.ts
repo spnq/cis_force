@@ -32,7 +32,6 @@ export class PaginatorComponent implements OnInit {
       this.pageSizeOptions = [users.per_page]
       this.paginatonService.store.next([...this.users.data]) 
       this.paginatonService.updateStore()  
-      console.log(this.paginatonService.userStore)
     })
   }
 

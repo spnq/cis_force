@@ -1,4 +1,10 @@
 main {
-    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
     margin-top: 4rem; 
+}
+
+::ng-deep app-paginator {
+    width: 100%;
+    margin-right: 5rem;
 }

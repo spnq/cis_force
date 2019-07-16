@@ -13,7 +13,6 @@ export class PaginatonService {
 
     public updateStore():void {
         (this.store as Observable<iDatum[]>).subscribe( users => this.userStore = [...this.userStore, ...users])
-        console.log([...new Set(this.userStore.map( el => el.id))])
     }
     /**
      * Get users from provided page number
