@@ -4,4 +4,7 @@
         <mat-card-title>{{user.first_name}}, {{user.last_name}}</mat-card-title>
         <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-actions>
+        <button  mat-raised-button routerLink="/user/{{user.id}}">MORE</button>
+    </mat-card-actions>
 </mat-card>

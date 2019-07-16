@@ -1,19 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PaginatonService } from '../paginaton.service';
-import { iUser, iDatum } from './model';
+import { Component, Input } from '@angular/core';
+import { iDatum } from './model';
 
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.scss']
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent {
 
   constructor() { }
 
   @Input()user: iDatum;
-
-  ngOnInit() {
-  }
 
 }

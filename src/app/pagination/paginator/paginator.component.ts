@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginatonService } from '../paginaton.service';
 import { iUser } from '../user-card/model';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-paginator',
@@ -10,21 +10,34 @@ import { PageEvent } from '@angular/material';
 })
 export class PaginatorComponent implements OnInit {
 
-  isLoading = false;
-  postsPerPage = 2;
-  pageSizeOptions = [1, 2, 5, 10];
-  currentPage = 1;
+  isLoading: boolean = false;
+  pageSize: number;
+  pageSizeOptions: number[];
+  currentPage: number = 1;
   users: iUser
+  length: number;
 
-  constructor( private pageinatonService: PaginatonService) { }
+  constructor( private paginatonService: PaginatonService) { }
 
   ngOnInit(): void {
-    this.pageinatonService.getUserByPageNumber(this.currentPage).subscribe( users => this.users = users)
+    this.getUsers(this.currentPage);
+    this.paginatonService.updateStore()  
+  }
+  
+  getUsers(pageNumber): void {
+    this.paginatonService.getUserByPageNumber(pageNumber).subscribe( (users:iUser) => {
+      this.users = users;
+      this.length = users.total;
+      this.pageSize = users.per_page
+      this.pageSizeOptions = [users.per_page]
+      this.paginatonService.store.next([...this.users.data]) 
+      this.paginatonService.updateStore()  
+      console.log(this.paginatonService.userStore)
+    })
   }
 
   onChangePage(pageData: PageEvent) {
-    this.isLoading = true;
     this.currentPage = pageData.pageIndex + 1;
-    this.postsPerPage = pageData.pageSize;
-}
+    this.getUsers(this.currentPage)
+  }
 }

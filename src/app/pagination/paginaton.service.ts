@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { iUser } from './user-card/model';
+import { Observable, Subject } from 'rxjs';
+import { iUser, iDatum } from './user-card/model';
 
 @Injectable({providedIn: 'root'})
 export class PaginatonService {
+
     constructor( private http: HttpClient) {}
 
+    store: Subject<iDatum[]> = new Subject(); 
+    userStore: iDatum[] = [];
+
+    public updateStore():void {
+        (this.store as Observable<iDatum[]>).subscribe( users => this.userStore = [...this.userStore, ...users])
+        console.log([...new Set(this.userStore.map( el => el.id))])
+    }
     /**
      * Get users from provided page number
      */
