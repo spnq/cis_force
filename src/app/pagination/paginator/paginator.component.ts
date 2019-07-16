@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginatonService } from '../paginaton.service';
-import { iUser } from '../user-card/model';
+import { iUser } from '../../model';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -25,7 +25,7 @@ export class PaginatorComponent implements OnInit {
   }
   
   getUsers(pageNumber): void {
-    this.paginatonService.getUserByPageNumber(pageNumber).subscribe( (users:iUser) => {
+    this.paginatonService.getUsersByPageNumber(pageNumber).subscribe( (users:iUser) => {
       this.users = users;
       this.length = users.total;
       this.pageSize = users.per_page

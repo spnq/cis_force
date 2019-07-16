@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaginatonService } from '../paginaton.service';
-import { iDatum } from '../user-card/model';
+import { iDatum } from '../../model';
 
 @Component({
   selector: 'app-single-user',
@@ -18,7 +18,7 @@ export class SingleUserComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.user = this.paginatorService.userStore.filter( el => el.id === this.id)[0]
     if (!this.user) {
-      this.message = 'First, user must be fetch from the Home page'
+      this.paginatorService.getSingleUser(this.id).subscribe( user => this.user = user.data);
     }
   }
 }

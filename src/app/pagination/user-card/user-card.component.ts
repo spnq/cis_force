@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { iDatum } from './model';
+import { iDatum } from '../../model';
 
 @Component({
   selector: 'app-user-card',
