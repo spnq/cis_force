@@ -1,5 +1,11 @@
+<ng-container *ngIf='users'>
+    <ng-container *ngFor="let user of users.data">
+            <app-user-card [user]="user"></app-user-card>
+    </ng-container>
+</ng-container>
+
 <mat-paginator>
-    [length]="length"
+    [length]="length" 
     [pageSize]="pageSize"
     [pageSizeOption]="pageSizeOptions"
     (page)="onPageChange($event)"

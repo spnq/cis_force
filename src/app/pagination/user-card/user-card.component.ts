@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PaginatonService } from '../paginaton.service';
+import { iUser, iDatum } from './model';
 
 @Component({
   selector: 'app-user-card',
@@ -8,10 +9,11 @@ import { PaginatonService } from '../paginaton.service';
 })
 export class UserCardComponent implements OnInit {
 
-  constructor(private userCardService: PaginatonService) { }
+  constructor() { }
+
+  @Input()user: iDatum;
 
   ngOnInit() {
-    this.userCardService.getUserByPageNumber(2)
   }
 
 }
