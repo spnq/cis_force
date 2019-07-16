@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginatonService } from '../paginaton.service';
 import { iUser } from '../user-card/model';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-paginator',
@@ -9,16 +10,21 @@ import { iUser } from '../user-card/model';
 })
 export class PaginatorComponent implements OnInit {
 
-  length = 100;
-  pageSize = 10;
+  isLoading = false;
+  postsPerPage = 2;
   pageSizeOptions = [1, 2, 5, 10];
+  currentPage = 1;
   users: iUser
 
   constructor( private pageinatonService: PaginatonService) { }
 
-  ngOnInit() {
-    this.pageinatonService.getUserByPageNumber(0).subscribe( users => {
-      this.users = users
-      console.log(users)})
+  ngOnInit(): void {
+    this.pageinatonService.getUserByPageNumber(this.currentPage).subscribe( users => this.users = users)
   }
+
+  onChangePage(pageData: PageEvent) {
+    this.isLoading = true;
+    this.currentPage = pageData.pageIndex + 1;
+    this.postsPerPage = pageData.pageSize;
+}
 }
