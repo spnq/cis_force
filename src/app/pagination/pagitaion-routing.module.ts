@@ -6,7 +6,7 @@ import { SingleUserComponent } from './single-user/single-user.component';
 
 const routes: Routes = [
     {path: '', component: PaginatorComponent},
-    { path: 'user/:id', component: SingleUserComponent },
+    {path: 'user/:id', component: SingleUserComponent },
 
 ]
 

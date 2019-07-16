@@ -11,8 +11,20 @@ export class PaginatonService {
     store: Subject<iDatum[]> = new Subject(); 
     userStore: iDatum[] = [];
 
+    private findObjectById = (id:number):iDatum => this.userStore.find(element => id === element.id)
+
     public updateStore():void {
         (this.store as Observable<iDatum[]>).subscribe( users => this.userStore = [...this.userStore, ...users])
+        this.userStore = Array.from(new Set(this.userStore.map( element => element.id)))
+             .map(id => { return {
+                                    id: id, 
+                                    email: this.findObjectById(id).email,
+                                    last_name: this.findObjectById(id).last_name,
+                                    first_name: this.findObjectById(id).first_name,
+                                    avatar: this.findObjectById(id).avatar
+                                }
+                        }
+                 )
     }
     /**
      * Get users from provided page number

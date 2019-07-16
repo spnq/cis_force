@@ -4,9 +4,8 @@ main {
     margin-top: 4rem; 
 }
 
-::ng-deep app-paginator {
+::ng-deep app-paginator{
     width: 100%;
     margin: 0 2rem;
     justify-content: space-between;
-
 }
