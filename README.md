@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spnq/cis_force.svg?branch=master)](https://travis-ci.org/spnq/cis_force)
+
 # Angular Test Task
 The main goal of the task is to show your skills in the best way possible. Please use proper styling and animation.
 
