@@ -18,3 +18,6 @@ Quality of code (proper logic, structure and style) is very important, and we sh
 
 ## Optional
 Introduce proper caching to avoid additional requests.
+
+## Deployment
+Visit live at https://cisforce-8e1d3.firebaseapp.com
