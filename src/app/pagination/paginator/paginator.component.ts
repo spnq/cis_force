@@ -1,42 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PaginatonService } from '../paginaton.service';
 import { iUser } from '../../model';
 import { PageEvent } from '@angular/material/paginator';
+import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnDestroy {
 
-  isLoading: boolean = false;
   pageSize: number;
   pageSizeOptions: number[];
-  currentPage: number = 1;
-  users: iUser
+  users: iUser;
   length: number;
+  destroy$: Subject<boolean> = new Subject();
 
-  constructor( private paginatonService: PaginatonService) { }
+  constructor(private paginatonService: PaginatonService) { }
 
   ngOnInit(): void {
-    this.getUsers(this.currentPage);
-    this.paginatonService.updateStore()  
+    this.paginatonService.initStorage()
+    this.paginatonService.visitedPages.pipe(takeUntil(this.destroy$)).subscribe( page => this.paginatonService.pages.push(page))
+    this.paginatonService.store$.pipe(takeUntil(this.destroy$)).subscribe( users => this.paginatonService.userStore.push(users))
+    if (!this.paginatonService.pages.includes(1)) this.paginatonService.visitedPages.next(1)
+    if (this.paginatonService.userStore[0]) {
+      this.fillInData(this.paginatonService.userStore.flat()[0])
+    } else {
+      this.paginatonService.currentPage = 1;
+      this.getUsers(this.paginatonService.currentPage);
+    }
   }
   
-  getUsers(pageNumber): void {
-    this.paginatonService.getUsersByPageNumber(pageNumber).subscribe( (users:iUser) => {
-      this.users = users;
-      this.length = users.total;
-      this.pageSize = users.per_page
-      this.pageSizeOptions = [users.per_page]
-      this.paginatonService.store.next([...this.users.data]) 
-      this.paginatonService.updateStore()  
+  getUsers(pageNumber: number): void {
+    this.paginatonService.getUsersByPageNumber(pageNumber).pipe(takeUntil(this.destroy$)).subscribe( (users:iUser) => {
+      this.fillInData(users)
+      this.paginatonService.store$.next([this.users])
     })
   }
 
-  onChangePage(pageData: PageEvent) {
-    this.currentPage = pageData.pageIndex + 1;
-    this.getUsers(this.currentPage)
+  onChangePage(pageData: PageEvent): void {
+    this.paginatonService.currentPage = pageData.pageIndex + 1;
+    if (this.paginatonService.pages.includes(this.paginatonService.currentPage)) {
+      this.fillInData(this.paginatonService.userStore[pageData.pageIndex][0])
+    } else {
+      this.paginatonService.visitedPages.next(this.paginatonService.currentPage)  
+      this.getUsers(this.paginatonService.currentPage)
+    }
+  }
+
+  fillInData(source: iUser): void {
+    this.users = source
+    this.length = source.total;
+    this.pageSize = source.per_page
+    this.pageSizeOptions = [source.per_page]
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true)
   }
 }
