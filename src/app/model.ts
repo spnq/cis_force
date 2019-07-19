@@ -1,28 +1,28 @@
 
-export interface iUser {
-    page:        number;
-    per_page:    number;
-    total:       number;
+export interface IUser {
+    page: number;
+    per_page: number;
+    total: number;
     total_pages: number;
-    data:        iDatum[];
+    data: IDatum[];
 }
 
-export interface iDatum {
-    id:         number;
-    email:      string;
+export interface IDatum {
+    id: number;
+    email: string;
     first_name: string;
-    last_name:  string;
-    avatar:     string;
+    last_name: string;
+    avatar: string;
 }
 
-export interface iSingle {
-    data: iData;
+export interface ISingle {
+    data: IData;
 }
 
-export interface iData {
-    id:         number;
-    email:      string;
+export interface IData {
+    id: number;
+    email: string;
     first_name: string;
-    last_name:  string;
-    avatar:     string;
+    last_name: string;
+    avatar: string;
 }
