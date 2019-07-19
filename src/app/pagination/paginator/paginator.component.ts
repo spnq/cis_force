@@ -4,21 +4,21 @@ import { IUser } from '../../model';
 import { PageEvent } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { BaseComponent } from 'src/app/base.component';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit, OnDestroy {
+export class PaginatorComponent extends BaseComponent implements OnInit {
 
   pageSize: number;
   pageSizeOptions: number[];
   users: IUser;
   length: number;
-  destroy$: Subject<boolean> = new Subject();
 
-  constructor(private paginatonService: PaginatonService) { }
+  constructor(private paginatonService: PaginatonService) { super(); }
 
   ngOnInit(): void {
     this.paginatonService.initStorage();
@@ -55,9 +55,5 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.length = source.total;
     this.pageSize = source.per_page;
     this.pageSizeOptions = [source.per_page];
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
   }
 }

@@ -4,19 +4,19 @@ import { PaginatonService } from '../paginaton.service';
 import { IDatum, IUser } from '../../model';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { BaseComponent } from 'src/app/base.component';
 
 @Component({
   selector: 'app-single-user',
   templateUrl: './single-user.component.html',
   styleUrls: ['./single-user.component.scss']
 })
-export class SingleUserComponent implements OnInit, OnDestroy {
+export class SingleUserComponent extends BaseComponent implements OnInit {
   id: number;
   user: IDatum;
   message: string;
-  destroy$: Subject<boolean> = new Subject();
 
-  constructor(private route: ActivatedRoute, private paginatorService: PaginatonService) { }
+  constructor(private route: ActivatedRoute, private paginatorService: PaginatonService) { super(); }
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -31,9 +31,5 @@ export class SingleUserComponent implements OnInit, OnDestroy {
 
   findUserInStore(userObject): undefined | IDatum {
     return userObject.data.find( user => user.id === this.id);
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
   }
 }
