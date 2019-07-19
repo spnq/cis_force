@@ -1,23 +1,23 @@
 <main *ngIf="user">
-    <mat-card class="card">
-            <mat-card-header>
-                <img class="userpic" mat-card-avatar src={{user.avatar}} alt="Userpic">
-            </mat-card-header>
-            <mat-card-content>
-                   <section class="info">
-                       <p><span class='title'>Name: </span>{{user.first_name}}</p>
-                    </section>
-                    <mat-divider></mat-divider>
-                    <section class="info">
-                        <p><span class='title'>Last Name: </span>{{user.last_name}}</p>
-                    </section>
-                    <mat-divider></mat-divider>
-                    <section class="info">
-                        <p><span class='title'>Email: </span>{{user.email}}</p>
-                   </section>
-            </mat-card-content>
-            <mat-card-actions>
-                <button  mat-raised-button routerLink="/">BACK</button>
-            </mat-card-actions>
-    </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <img class="userpic" mat-card-avatar src={{user.avatar}} alt="Userpic">
+    </mat-card-header>
+    <mat-card-content>
+      <section class="info">
+        <p><span class='title'>Name: </span>{{user.first_name}}</p>
+      </section>
+      <mat-divider></mat-divider>
+      <section class="info">
+        <p><span class='title'>Last Name: </span>{{user.last_name}}</p>
+      </section>
+      <mat-divider></mat-divider>
+      <section class="info">
+        <p><span class='title'>Email: </span>{{user.email}}</p>
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button routerLink="/">BACK</button>
+    </mat-card-actions>
+  </mat-card>
 </main>

@@ -1,25 +1,25 @@
-main{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+main {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 
-    mat-card{
-        width: 30vw;
+  mat-card {
+    width: 30vw;
 
-        .userpic{
-            width: 7rem;
-            height: 7rem;
-            margin-bottom: 1rem; 
-        }
-        .info {
-            display: flex;
-            flex-direction: row;
-
-            .title {
-                font-size: 1.1rem;
-                font-weight: bold
-            }
-        }
+    .userpic {
+      width: 7rem;
+      height: 7rem;
+      margin-bottom: 1rem;
     }
-}
 
+    .info {
+      display: flex;
+      flex-direction: row;
+
+      .title {
+        font-size: 1.1rem;
+        font-weight: bold
+      }
+    }
+  }
+}
