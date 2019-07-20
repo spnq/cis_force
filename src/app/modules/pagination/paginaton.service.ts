@@ -1,16 +1,16 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { IUser, ISingle } from '../model';
+import { IUser, ISingle } from './interfaces/paginator.model';
 import { takeUntil } from 'rxjs/operators';
+import { BaseComponent } from 'src/app/base.component';
 
 @Injectable({providedIn: 'root'})
-export class PaginatonService implements OnDestroy {
+export class PaginatonService extends BaseComponent {
 
-    constructor( private http: HttpClient) {}
+    constructor( private http: HttpClient) { super(); }
 
     public store$: Subject<IUser[]> = new Subject();
-    private destroy$: Subject<boolean> = new Subject();
     public userStore: Array<IUser[]> = [];
     public visitedPages: Subject<number> = new Subject();
     public currentPage: number;
@@ -23,18 +23,11 @@ export class PaginatonService implements OnDestroy {
         }); });
     }
 
-    /**
-     * Get users from provided page number
-     */
     public getUsersByPageNumber(page: number): Observable<IUser> {
         return this.http.get<IUser>(`https://reqres.in/api/users?page=${page}`);
     }
 
     public getSingleUser(id: number): Observable<ISingle> {
         return this.http.get<ISingle>(`https://reqres.in/api/users/${id}`);
-    }
-
-    ngOnDestroy(): void {
-        this.destroy$.next(true);
     }
 }

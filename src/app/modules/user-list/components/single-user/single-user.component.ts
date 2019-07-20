@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PaginatonService } from '../paginaton.service';
-import { IDatum, IUser } from '../../model';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+
+import { PaginatonService } from '../../../pagination/paginaton.service';
 import { BaseComponent } from 'src/app/base.component';
+import { IData, IUser } from 'src/app/modules/pagination/interfaces/paginator.model';
+
 
 @Component({
   selector: 'app-single-user',
@@ -13,7 +14,7 @@ import { BaseComponent } from 'src/app/base.component';
 })
 export class SingleUserComponent extends BaseComponent implements OnInit {
   id: number;
-  user: IDatum;
+  user: IData;
   message: string;
 
   constructor(private route: ActivatedRoute, private paginatorService: PaginatonService) { super(); }
@@ -29,7 +30,7 @@ export class SingleUserComponent extends BaseComponent implements OnInit {
     }
   }
 
-  findUserInStore(userObject): undefined | IDatum {
+  findUserInStore(userObject): undefined | IData {
     return userObject.data.find( user => user.id === this.id);
   }
 }

@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserCardComponent } from './user-card/user-card.component';
-import { PaginatorComponent } from './paginator/paginator.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { PaginationRoutingModule } from './pagitaion-routing.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserListModule } from '../user-list/user-list.module';
 import { MatCardModule, MatButtonModule, MatDividerModule } from '@angular/material';
-import { SingleUserComponent } from './single-user/single-user.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 
 @NgModule({
   declarations: [
-    UserCardComponent,
     PaginatorComponent,
-    SingleUserComponent
+    UserCardComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +19,8 @@ import { SingleUserComponent } from './single-user/single-user.component';
     MatPaginatorModule,
     MatCardModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    UserListModule
   ]
 })
 export class PaginationModule { }

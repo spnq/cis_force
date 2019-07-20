@@ -1,7 +1,7 @@
 <main>
   <section>
     <ng-container *ngIf='users'>
-      <ng-container *ngFor="let user of users.data">
+      <ng-container *ngFor="let user of users.data; trackBy: trackByFn">
         <app-user-card [user]="user"></app-user-card>
       </ng-container>
     </ng-container>

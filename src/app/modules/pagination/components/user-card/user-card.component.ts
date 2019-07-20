@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IDatum } from '../../model';
+import { IData } from 'src/app/modules/pagination/interfaces/paginator.model';
+
 
 @Component({
   selector: 'app-user-card',
@@ -10,6 +11,6 @@ export class UserCardComponent {
 
   constructor() { }
 
-  @Input()user: IDatum;
+  @Input() user: IData;
 
 }

@@ -4,15 +4,7 @@ export interface IUser {
     per_page: number;
     total: number;
     total_pages: number;
-    data: IDatum[];
-}
-
-export interface IDatum {
-    id: number;
-    email: string;
-    first_name: string;
-    last_name: string;
-    avatar: string;
+    data: IData[];
 }
 
 export interface ISingle {

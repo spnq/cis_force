@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PaginatonService } from '../paginaton.service';
-import { IUser } from '../../model';
+import { Component, OnInit } from '@angular/core';
+import { PaginatonService } from '../../paginaton.service';
+
 import { PageEvent } from '@angular/material/paginator';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
+import { UserCardComponent } from '../user-card/user-card.component';
+import { IUser } from '../../interfaces/paginator.model';
 
 @Component({
   selector: 'app-paginator',
@@ -55,5 +56,9 @@ export class PaginatorComponent extends BaseComponent implements OnInit {
     this.length = source.total;
     this.pageSize = source.per_page;
     this.pageSizeOptions = [source.per_page];
+  }
+
+  trackByFn(index: number, item: UserCardComponent): UserCardComponent {
+    return item;
   }
 }

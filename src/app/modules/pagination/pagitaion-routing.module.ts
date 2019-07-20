@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PaginatorComponent } from './paginator/paginator.component';
-import { SingleUserComponent } from './single-user/single-user.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 const routes: Routes = [
     {path: '', component: PaginatorComponent},
-    {path: 'user/:id', component: SingleUserComponent },
 ];
 
 @NgModule({
