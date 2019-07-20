@@ -7,10 +7,13 @@ main {
 ::ng-deep app-paginator{
     width: 100%;
     margin: 0 2rem;
-    justify-content: space-between;
+    justify-content: space-around;
+    max-width: 1200px;
+
 }
 ::ng-deep app-single-user{
     width: 100%;
     margin: 0 2rem;
-    justify-content: space-between;
+    justify-content: space-around;
+    max-width: 350px;
 }
