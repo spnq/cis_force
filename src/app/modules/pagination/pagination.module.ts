@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { PaginationRoutingModule } from './pagitaion-routing.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UserListModule } from '../user-list/user-list.module';
 import { MatCardModule, MatButtonModule, MatDividerModule } from '@angular/material';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { SingleUserModule } from '../single-user/single-user.module';
+
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     MatCardModule,
     MatButtonModule,
     MatDividerModule,
-    UserListModule
+    SingleUserModule
   ]
 })
 export class PaginationModule { }

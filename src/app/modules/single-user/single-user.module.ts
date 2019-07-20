@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SingleUserComponent } from './components/single-user/single-user.component';
 import { MatCardModule, MatButtonModule, MatDividerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { UserListRoutingModule } from './user-list-routing.module';
+import { UserListRoutingModule } from './single-user-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,4 +21,4 @@ import { UserListRoutingModule } from './user-list-routing.module';
     UserListRoutingModule
   ]
 })
-export class UserListModule { }
+export class SingleUserModule { }

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path: '', loadChildren: './modules/pagination/pagination.module#PaginationModule'},
-  {path: 'user/:id', loadChildren: './modules/user-list/user-list.module#UserListModule'}
+  {path: 'user/:id', loadChildren: './modules/single-user/single-user.module#SingleUserModule'}
 ];
 
 @NgModule({
