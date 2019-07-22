@@ -1,17 +1,17 @@
 
-export interface IUser {
+export interface IPageInfo {
     page: number;
     per_page: number;
     total: number;
     total_pages: number;
-    data: IData[];
+    data: IUserData[];
 }
 
 export interface ISingle {
-    data: IData;
+    data: IUserData;
 }
 
-export interface IData {
+export interface IUserData {
     id: number;
     email: string;
     first_name: string;

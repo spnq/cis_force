@@ -1,13 +1,6 @@
 <main>
-  <section>
-    <ng-container *ngIf='users'>
-      <ng-container *ngFor="let user of users.data; trackBy: trackByFn">
-        <app-user-card [user]="user"></app-user-card>
-      </ng-container>
-    </ng-container>
-  </section>
-
-  <mat-paginator *ngIf="users" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+  <app-user-list></app-user-list>
+  <mat-paginator  [length]="length" [pageIndex]="pageIndex-1" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
     (page)="onChangePage($event)">
   </mat-paginator>
 </main>

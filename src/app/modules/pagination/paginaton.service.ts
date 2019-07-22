@@ -1,33 +1,49 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { IUser, ISingle } from './interfaces/paginator.model';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, BehaviorSubject} from 'rxjs';
+import { IPageInfo, ISingle } from './interfaces/paginator.model';
 import { BaseComponent } from 'src/app/base.component';
+import { Store } from 'src/app/store.service';
+import { distinctUntilChanged, map, tap, takeUntil } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PaginatonService extends BaseComponent {
+    private readonly _currentPage$: BehaviorSubject<number> = new BehaviorSubject(1);
+    private readonly _pageInfoRequest = () => this.http.get<IPageInfo>(`https://reqres.in/api/users?page=${this.currentPage}`);
 
-    constructor( private http: HttpClient) { super(); }
+    constructor(private http: HttpClient, private store: Store) { super(); }
 
-    public store$: Subject<IUser[]> = new Subject();
-    public userStore: Array<IUser[]> = [];
-    public visitedPages: Subject<number> = new Subject();
-    public currentPage: number;
-    public pages: number[] = [];
-
-    public initStorage(): void {
-        (this.store$ as Observable<IUser[]>).pipe(takeUntil(this.destroy$))
-        .subscribe( users => { users.forEach( user => {
-                if (!this.pages.includes(user.page)) { this.userStore.push([...users]); }
-        }); });
+    get currentPage(): number {
+        return this._currentPage$.getValue();
     }
 
-    public getUsersByPageNumber(page: number): Observable<IUser> {
-        return this.http.get<IUser>(`https://reqres.in/api/users?page=${page}`);
+    public currentPageObservable(): Observable<number> {
+        return this._currentPage$.asObservable();
     }
 
-    public getSingleUser(id: number): Observable<ISingle> {
-        return this.http.get<ISingle>(`https://reqres.in/api/users/${id}`);
+    public setCurrentPage(page: number): void {
+        this._currentPage$.next(page);
     }
+
+    public getCurrentPageParams(): Observable<IPageInfo> {
+        return new Observable<IPageInfo>(
+            subscriber => {
+                try {
+                    if (!this.findRecord()) {
+                        this._pageInfoRequest().subscribe( pageInfo => {
+                            this.store.setState(pageInfo);
+                            subscriber.next(pageInfo);
+                            });
+                    } else {
+                        subscriber.next(this.findRecord());
+                    }
+                } catch (error) {
+                    subscriber.error(error);
+                }
+            });
+    }
+    public findRecord(): IPageInfo | undefined {
+        return this.store.getStateSnapshot().find(pageRecord => pageRecord.page === this.currentPage);
+      }
+
 }

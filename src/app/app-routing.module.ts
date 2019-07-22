@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SingleUserComponent } from './modules/user-list/components/single-user/single-user.component';
+import { PaginatorComponent } from './modules/pagination/components/paginator/paginator.component';
 
 const routes: Routes = [
-  {path: '', loadChildren: './modules/pagination/pagination.module#PaginationModule'},
-  {path: 'user/:id', loadChildren: './modules/single-user/single-user.module#SingleUserModule'}
+  {path: '', component: PaginatorComponent}
 ];
 
 @NgModule({
