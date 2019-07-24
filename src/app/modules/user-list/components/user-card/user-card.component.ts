@@ -7,9 +7,5 @@ import { IUserData } from 'src/app/modules/pagination/interfaces/paginator.model
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent {
-
-  constructor() { }
-
   @Input() user: IUserData;
-
 }

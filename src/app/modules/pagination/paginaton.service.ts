@@ -10,49 +10,50 @@ import { PAGE_API } from '../../constants';
 @Injectable({ providedIn: 'root' })
 export class PaginatonService extends BaseComponent {
 
-    constructor(private http: HttpClient, private store: Store) { super(); }
+  constructor(private http: HttpClient, private store: Store) { super(); }
 
-    private readonly _currentPage$: BehaviorSubject<number> = new BehaviorSubject(1);
+  private readonly _currentPage$: BehaviorSubject<number> = new BehaviorSubject(1);
 
-    private readonly getCurrentPageParams = new Observable<IPageInfo>(
-            subscriber => {
-                try {
-                    if (!this.findRecord()) {
-                        this._pageInfoRequest().subscribe( pageInfo => {
-                            this.store.setState(pageInfo);
-                            subscriber.next(pageInfo);
-                            subscriber.complete();
-                            });
-                    } else {
-                        subscriber.next(this.findRecord());
-                        subscriber.complete();
-                    }
-                } catch (error) {
-                    subscriber.error(error);
-                }
-            }).pipe(share(), takeUntil(this.destroy$));
+  private readonly _getCurrentPageParams = new Observable<IPageInfo>(
+    subscriber => {
+        try {
+          if (!this.findRecord()) {
+            this._pageInfoRequest().subscribe( pageInfo => {
+              this.store.setState(pageInfo);
+              subscriber.next(pageInfo);
+              subscriber.complete();
+            });
+          } else {
+            subscriber.next(this.findRecord());
+            subscriber.complete();
+            }
+        } catch (error) {
+          subscriber.error(error);
+        }
+    }).pipe(share(), takeUntil(this.destroy$));
 
-    private readonly _pageInfoRequest = () => this.http.get<IPageInfo>(PAGE_API + this.currentPage);
+  private readonly _pageInfoRequest = (): Observable<IPageInfo> => this.http.get<IPageInfo>(PAGE_API + this._currentPage);
 
-    public currentPageObservable(): Observable<number> {
-        return this._currentPage$.asObservable();
-    }
+  private get _currentPageObservable(): Observable<number> {
+    return this._currentPage$.asObservable();
+  }
 
-    public get pageUpdates(): Observable<IPageInfo> {
-        return this.currentPageObservable().pipe(
-            flatMap(newPage => this.getCurrentPageParams),
-            takeUntil(this.destroy$)
-        );
-    }
-    private get currentPage(): number {
-        return this._currentPage$.getValue();
-    }
-    public setCurrentPage(page: number): void {
-        this._currentPage$.next(page);
-    }
+  private get _currentPage(): number {
+    return this._currentPage$.getValue();
+  }
 
-    private findRecord(): IPageInfo | undefined {
-        return this.store.getStateSnapshot().find(pageRecord => pageRecord.page === this.currentPage);
-      }
+  private findRecord(): IPageInfo | undefined {
+    return this.store.getStateSnapshot().find(pageRecord => pageRecord.page === this._currentPage);
+  }
 
+  public get pageUpdates(): Observable<IPageInfo> {
+    return this._currentPageObservable.pipe(
+      flatMap(newPage => this._getCurrentPageParams),
+      takeUntil(this.destroy$)
+    );
+  }
+
+  public setCurrentPage(page: number): void {
+    this._currentPage$.next(page);
+  }
 }

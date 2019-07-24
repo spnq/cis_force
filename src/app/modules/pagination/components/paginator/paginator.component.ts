@@ -3,14 +3,10 @@ import { PaginatonService } from '../../paginaton.service';
 
 import { PageEvent } from '@angular/material/paginator';
 import { BaseComponent } from 'src/app/base.component';
-import { Store } from 'src/app/store.service';
-import { distinctUntilChanged, takeUntil, map, flatMap } from 'rxjs/operators';
-import { IUserData } from '../../interfaces/paginator.model';
 
 @Component({
   selector: 'app-paginator',
-  templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.scss'],
+  templateUrl: './paginator.component.html'
 })
 export class PaginatorComponent extends BaseComponent implements OnInit {
 

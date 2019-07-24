@@ -1,5 +1,5 @@
 <section>
-  <ng-container *ngIf="users && !isLoading; else loader">
+  <ng-container *ngIf="users; else loader">
     <ng-container *ngFor="let user of users; trackBy: trackByFn">
       <app-user-card [user]="user"></app-user-card>
     </ng-container>

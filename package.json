@@ -7,7 +7,7 @@
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish": "ng lint && ng build --prod && firebase deploy"
+    "publish": "ng lint && ng build --prod --aot && firebase deploy"
   },
   "private": true,
   "dependencies": {

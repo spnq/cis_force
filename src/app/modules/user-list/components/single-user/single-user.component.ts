@@ -24,8 +24,8 @@ export class SingleUserComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.userService.getSingleUser(this.id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe( user => this.user = user);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe( user => this.user = user);
   }
 
 }

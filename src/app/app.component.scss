@@ -1,19 +1,18 @@
 main {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4rem; 
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem; 
 }
 
 ::ng-deep app-paginator{
-    width: 100%;
-    margin: 0 2rem;
-    justify-content: space-around;
-    max-width: 1200px;
-
+  width: 100%;
+  margin: 0 2rem;
+  justify-content: space-around;
+  max-width: 1200px;
 }
 ::ng-deep app-single-user{
-    width: 100%;
-    margin: 0 2rem;
-    justify-content: space-around;
-    max-width: 350px;
+  width: 100%;
+  margin: 0 2rem;
+  justify-content: space-around;
+  max-width: 350px;
 }
