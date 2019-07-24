@@ -15,13 +15,10 @@ export class UserListComponent extends BaseComponent implements OnInit {
   constructor(private paginatorService: PaginatonService) { super(); }
 
   users: IUserData[];
+
   ngOnInit(): void {
-      this.paginatorService.currentPageObservable().pipe(
-        flatMap( pageChanged => this.paginatorService.getCurrentPageParams()),
-        map( pageInfo => pageInfo.data),
-        takeUntil(this.destroy$)
-      )
-      .subscribe( usersData => this.users = usersData);
+    this.paginatorService.pageUpdates.pipe(map( pageInfo => pageInfo.data))
+                                     .subscribe( usersData => this.users = usersData);
     }
 
   trackByFn(index: number, item: UserCardComponent): UserCardComponent {

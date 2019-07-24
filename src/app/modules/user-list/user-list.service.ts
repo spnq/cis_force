@@ -4,6 +4,7 @@ import { ISingle, IUserData } from '../pagination/interfaces/paginator.model';
 import { HttpClient } from '@angular/common/http';
 import { Store } from 'src/app/store.service';
 import { map } from 'rxjs/operators';
+import { SINGLE_API } from '../../constants';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -14,9 +15,9 @@ export class UserService {
       subscriber => {
         try {
           if (this.findSingeUserById(id)) {
-            subscriber.next(this.findSingeUserById(id))
+            subscriber.next(this.findSingeUserById(id));
           } else {
-            this.http.get<ISingle>(`https://reqres.in/api/users/${id}`)
+            this.http.get<ISingle>(SINGLE_API + id)
               .pipe(map(next => next.data))
               .subscribe(user => subscriber.next(user));
           }

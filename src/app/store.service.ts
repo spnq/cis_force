@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IPageInfo } from './modules/pagination/interfaces/paginator.model';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class Store {
@@ -12,7 +11,7 @@ export class Store {
   }
 
   public getState(): Observable<IPageInfo[]> {
-    return this._state$.pipe(distinctUntilChanged());
+    return this._state$.asObservable();
   }
 
   public setState(newChunk: IPageInfo): void {
