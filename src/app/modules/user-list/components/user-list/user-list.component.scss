@@ -8,6 +8,10 @@ section {
   flex-wrap: wrap;
 }
 
+mat-spinner {
+  margin: auto;
+}
+
 @media only screen and (max-width: 768px) {
   section {
     flex-direction: column;

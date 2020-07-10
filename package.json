@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
+    "postinstall": "ngcc",
     "e2e": "ng e2e",
     "publish": "ng lint && ng build --prod --aot && firebase deploy"
   },
