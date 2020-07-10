@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { IPageInfo } from './interfaces/paginator.model';
 import { BaseComponent } from 'src/app/base.component';
 import { Store } from 'src/app/store.service';
-import { takeUntil, share, flatMap } from 'rxjs/operators';
+import { takeUntil, share, mergeMap } from 'rxjs/operators';
 import { PAGE_API } from '../../constants';
 
 @Injectable({ providedIn: 'root' })
@@ -48,7 +48,7 @@ export class PaginatonService extends BaseComponent {
 
   public get pageUpdates(): Observable<IPageInfo> {
     return this._currentPageObservable.pipe(
-      flatMap(newPage => this._getCurrentPageParams),
+      mergeMap(newPage => this._getCurrentPageParams),
       takeUntil(this.destroy$)
     );
   }
